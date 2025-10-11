@@ -1,0 +1,18 @@
+# venv（仮想環境）を無視
+venv/
+
+# SQLiteのデータベースファイルを無視
+**/instance/*.db
+
+# Pythonのキャッシュファイルを無視
+__pycache__/
+*.pyc
+
+# VScodeの設定ファイルを無視
+.vscode/
+
+# Macの不要ファイルを無視
+.DS_Store
+
+# 環境変数ファイルを無視
+.env
