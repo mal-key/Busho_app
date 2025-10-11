@@ -1,22 +1,25 @@
 ## 開発環境のセットアップ
 
-依存パッケージのインストール
-pip install -r equirements.txt
-
-データベースの初期化 & JSON データのインポート
+**依存パッケージのインストール**
+```bash
+pip install -r requirements.txt
+```
+**データベースの初期化 & JSON データのインポート**
+```bash
 python3 setup.py
-
-SQLite の中身を確認
+```
+**SQLite の中身を確認**
+```bash
 sqlite3 app/instance/busho.db
 .table
 SELECT \* FROM busho LIMIT 5;
-
+```
 ## 開発サーバーの起動
-
+```bash
 flask --app app.bushoapp run
-
+```
 ## ディレクトリ構成
-
+```plaintext
 project_root/
 ├── app/
 │ ├── **init**.py
