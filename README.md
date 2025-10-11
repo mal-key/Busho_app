@@ -12,7 +12,7 @@ python3 setup.py
 ```bash
 sqlite3 app/instance/busho.db
 .table
-SELECT \* FROM busho LIMIT 5;
+SELECT * FROM busho LIMIT 5;
 ```
 ## 開発サーバーの起動
 ```bash
@@ -22,7 +22,7 @@ flask --app app.bushoapp run
 ```plaintext
 project_root/
 ├── app/
-│ ├── **init**.py
+│ ├── __init__.py
 │ ├── bushoapp.py ← Flask アプリ本体
 │ ├── models.py ← DB テーブル定義（SQLAlchemy）
 │ └── instance/
