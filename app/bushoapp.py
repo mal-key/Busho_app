@@ -1,9 +1,11 @@
-from flask import Flask
+from flask import Flask, Blueprint
 from app.models import db
 from pathlib import Path
 
+from app.bushocrud import bp
 
 app = Flask(__name__)
+app.register_blueprint(bp)
 
 # bushoapp.py ファイルのある場所（appディレクトリ）を基準に絶対パスを作る
 BASE_DIR = Path(__file__).resolve().parent
