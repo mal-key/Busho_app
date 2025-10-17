@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>武将読み仮名クイズ</title>
+  </head>
+  <body>
+    <p>武将名の読み仮名は？（ひらがなで入力してください）</p>
+    <p>{{ random_busho_name }}</p>
+    <form action="/quiz/input" method="post">
+      <label for="answer">解答欄：</label>
+      <input type="text" name="answer" required />
+      <button type="submit">判定</button>
+    </form>
+  </body>
+</html>

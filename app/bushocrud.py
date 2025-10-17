@@ -24,14 +24,14 @@ def create():
     # {'name': 'ヨウ', 'name_kana': 'you', 'birth_year': '1999', 'death_year': '2050'}
     # 割り当てるbusho_idを取得する処理
     busho = Busho(
-                    busho_id=form_data["busho_id"],
-                    name=form_data["name"],
-                    name_kana=form_data["name_kana"],
-                    birth_year=form_data["birth_year"],
-                    death_year=form_data["death_year"],
-                )
-                db.session.add(busho)  # Bushoモデルのインスタンスをセッションに追加
-            db.session.commit()  # セッションに追加された全ての変更をまとめてDBに反映
+        busho_id=form_data["busho_id"],
+        name=form_data["name"],
+        name_kana=form_data["name_kana"],
+        birth_year=form_data["birth_year"],
+        death_year=form_data["death_year"],
+    )
+    db.session.add(busho)  # Bushoモデルのインスタンスをセッションに追加
+    db.session.commit()  # セッションに追加された全ての変更をまとめてDBに反映
 
     return render_template("crud/create.html")
 
