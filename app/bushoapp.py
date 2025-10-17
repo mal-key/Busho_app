@@ -1,11 +1,17 @@
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, render_template, request
 from app.models import db
 from pathlib import Path
 
+# CRUD機能用とquiz機能用のBlueprintをそれぞれインポート
 from app.bushocrud import bp
+from app.bushoquiz import quiz_bp
 
-app = Flask(__name__)
+app = Flask(__name__)  # Flaskアプリケーションのインスタンスを作成
+
+# CRUD用とquiz用のBlueprintをアプリに登録（url_prefix=/crud(もしくは/quiz) のルート群を有効化）
 app.register_blueprint(bp)
+app.register_blueprint(quiz_bp)
+
 
 # bushoapp.py ファイルのある場所（appディレクトリ）を基準に絶対パスを作る
 BASE_DIR = Path(__file__).resolve().parent
