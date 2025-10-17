@@ -3,13 +3,13 @@ from app.models import db
 from pathlib import Path
 
 # CRUD機能用とquiz機能用のBlueprintをそれぞれインポート
-from app.bushocrud import bp
+from app.bushocrud import crud_bp
 from app.bushoquiz import quiz_bp
 
 app = Flask(__name__)  # Flaskアプリケーションのインスタンスを作成
 
 # CRUD用とquiz用のBlueprintをアプリに登録（url_prefix=/crud(もしくは/quiz) のルート群を有効化）
-app.register_blueprint(bp)
+app.register_blueprint(crud_bp)
 app.register_blueprint(quiz_bp)
 
 
@@ -28,5 +28,5 @@ db.init_app(app)
 
 # Hello World用のルート
 @app.route("/")
-def hello():
-    return "Hello, World!"
+def home():
+    return render_template("home.html")
