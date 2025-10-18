@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block content %}
+<ruby
+  ><h2>{{data.name}}</h2>
+  <rt>{{data.name_kana}}</rt></ruby
+>
+<p>出生年：{{data.birth_year}}</p>
+<p>没　年：{{data.death_year}}</p>
+
+<form action="/crud/update/{{data.busho_id}}" method="get">
+  <button>変更</button>
+</form>
+<form action="/crud/delete/{{data.busho_id}}" method="post">
+  <button>削除</button>
+</form>
+{% endblock %}

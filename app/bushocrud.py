@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect
 from sqlalchemy import desc
 
 from app.models import db, Busho
@@ -49,23 +49,62 @@ def bussho_list():
 
 
 # 武将詳細ページ
-@crud_bp.route("/detail/<busho_id>", methods=["GET"])
+@crud_bp.route("/detail/<int:busho_id>", methods=["GET"])
 def busho_detail(busho_id):
     # パスパラメータからbusho_idを取得
-    print(busho_id)
-
     # busho_idから武将データを取得
+    busho = Busho.query.filter(Busho.busho_id == busho_id).first()
+    data = {
+        "busho_id": busho.busho_id,
+        "name": busho.name,
+        "name_kana": busho.name_kana,
+        "birth_year": busho.birth_year,
+        "death_year": busho.death_year,
+    }
     # フロントに渡す
-    return
+    return render_template("crud/detail.html", data=data)
+
+
+# 武将更新ページ
+@crud_bp.route("/update/<int:busho_id>", methods=["GET"])
+def update_page(busho_id):
+    busho = Busho.query.filter(Busho.busho_id == busho_id).first()
+    data = {
+        "busho_id": busho.busho_id,
+        "name": busho.name,
+        "name_kana": busho.name_kana,
+        "birth_year": busho.birth_year,
+        "death_year": busho.death_year,
+    }
+    return render_template("crud/update.html", data=data)
 
 
 # 武将更新
-@crud_bp.route("/update", methods=["POST"])
-def update():
-    return
+@crud_bp.route("/update/<int:busho_id>", methods=["POST"])
+def update(busho_id):
+    form_data = request.form.to_dict()
+
+    busho = Busho.query.filter(Busho.busho_id == busho_id).first()
+    busho.name = form_data["name"]
+    busho.name_kana = form_data["name_kana"]
+    busho.birth_year = form_data["birth_year"]
+    busho.death_year = form_data["death_year"]
+
+    data = {
+        "busho_id": busho.busho_id,
+        "name": busho.name,
+        "name_kana": busho.name_kana,
+        "birth_year": busho.birth_year,
+        "death_year": busho.death_year,
+    }
+    db.session.commit()
+    return render_template("crud/detail.html", data=data)
 
 
 # 武将削除
-@crud_bp.route("/delete", methods=["POST"])
-def delete():
-    return
+@crud_bp.route("/delete/<int:busho_id>", methods=["POST"])
+def delete(busho_id):
+    busho = Busho.query.filter(Busho.busho_id == busho_id).first()
+    db.session.delete(busho)
+    db.session.commit()
+    return redirect("/crud/list")

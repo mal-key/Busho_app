@@ -1,25 +1,27 @@
 {% extends "base.html" %} {% block content %}
-
-<form action="/crud/create" method="post" class="form-example">
+<form
+  action="/crud/update/{{data.busho_id}}"
+  method="post"
+  class="form-example"
+>
   <div class="form-example">
     <label for="name">武将名: </label>
-    <input type="text" name="name" required />
+    <input type="text" name="name" value="{{data.name}}" required />
   </div>
   <div class="form-example">
     <label for="name">かな: </label>
-    <input type="text" name="name_kana" required />
+    <input type="text" name="name_kana" value="{{data.name_kana}}" required />
   </div>
   <div class="form-example">
     <label for="name">出生年: </label>
-    <input type="text" name="birth_year" required />
+    <input type="text" name="birth_year" value="{{data.birth_year}}" required />
   </div>
   <div class="form-example">
     <label for="name">没年: </label>
-    <input type="text" name="death_year" required />
+    <input type="text" name="death_year" value="{{data.death_year}}" required />
   </div>
-  <br></br>
   <div class="form-example">
-    <input type="submit" value="登録!" />
+    <input type="submit" value="更新" />
   </div>
 </form>
 <div>
@@ -27,5 +29,4 @@
   <p>{{ message }}</p>
   {% endif %}
 </div>
-
 {% endblock %}
