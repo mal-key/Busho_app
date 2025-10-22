@@ -1,4 +1,6 @@
+import os
 from flask import Flask, Blueprint, render_template, request
+from dotenv import load_dotenv
 from app.models import db
 from pathlib import Path
 
@@ -6,7 +8,11 @@ from pathlib import Path
 from app.bushocrud import crud_bp
 from app.bushoquiz import quiz_bp
 
+# .envファイルを読み込む
+load_dotenv()
+
 app = Flask(__name__)  # Flaskアプリケーションのインスタンスを作成
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")  # secret_keyの設定
 
 # CRUD用とquiz用のBlueprintをアプリに登録（url_prefix=/crud(もしくは/quiz) のルート群を有効化）
 app.register_blueprint(crud_bp)
@@ -26,7 +32,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
 
-# Hello World用のルート
+# home用のルート
 @app.route("/")
 def home():
     return render_template("home.html")

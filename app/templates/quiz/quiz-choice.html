@@ -3,10 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>武将生没年クイズ</title>
+    <title>武将没年クイズ</title>
   </head>
   <body>
     <p>この武将の没年はどれ？</p>
-    <p>{{ random_busho_name }}</p>
+    <p>{{ correct_busho_name }}</p>
+    <form action="{{ url_for('quiz.quiz_choice') }}" method="post">
+      {% for year in choice_list %}
+      <button type="submit" name="answer" value="{{year}}">{{year}}</button>
+      {% endfor %}
+    </form>
+    {% if result == "correct" %}
+    <p>正解です！</p>
+    {% elif result == "wrong" %}
+    <p>不正解です！</p>
+    <p>正解は「{{ correct_busho_deathyear }}」でした！</p>
+    {% endif %}
+    <form action="{{ url_for('home') }}" method="get">
+      <button type="submit">戻る</button>
+    </form>
+    {% if result %}
+    <form action="{{ url_for('quiz.quiz_choice_page') }}" method="get">
+      <button type="submit">次の問題へ</button>
+    </form>
+    {% endif %}
   </body>
 </html>

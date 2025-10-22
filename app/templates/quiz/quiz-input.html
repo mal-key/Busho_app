@@ -6,12 +6,26 @@
     <title>武将読み仮名クイズ</title>
   </head>
   <body>
-    <p>武将名の読み仮名は？（ひらがなで入力してください）</p>
+    <p>武将名の読み仮名は？（入力例：たなかたろう）</p>
     <p>{{ random_busho_name }}</p>
     <form action="/quiz/input" method="post">
       <label for="answer">解答欄：</label>
       <input type="text" name="answer" required />
       <button type="submit">判定</button>
     </form>
+    {% if result == "correct" %}
+    <p>正解です！</p>
+    {% elif result == "wrong" %}
+    <p>不正解です！</p>
+    <p>正解は「{{ correct_answer_kana }}」でした！</p>
+    {% endif %}
+    <form action="{{ url_for('home') }}" method="get">
+      <button type="submit">戻る</button>
+    </form>
+    {% if result %}
+    <form action="{{ url_for('quiz.quiz_input_page') }}" method="get">
+      <button type="submit">次の問題へ</button>
+    </form>
+    {% endif %}
   </body>
 </html>
